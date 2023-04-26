@@ -99,3 +99,6 @@ android {
         targetSdk = 32
     }
 }
+dependencies {
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+}
