@@ -53,7 +53,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.raywenderlich.organize.Logger
 import com.raywenderlich.organize.Platform
+import com.raywenderlich.organize.logSystemInfo
 import kotlin.math.max
 import kotlin.math.min
 
@@ -98,17 +100,14 @@ private fun ContentView() {
 }
 
 private fun makeItems(): List<Pair<String, String>> {
-  //1
   val platform = Platform()
 
-  //2
   val items = mutableListOf(
     Pair("Operating System", "${platform.osName} ${platform.osVersion}"),
     Pair("Device", platform.deviceModel),
     Pair("CPU", platform.cpuType)
   )
 
-  //3
   platform.screen?.let {
     val max = max(it.width, it.height)
     val min = min(it.width, it.height)
@@ -116,6 +115,7 @@ private fun makeItems(): List<Pair<String, String>> {
     items.add(Pair("Display", "${max}×${min} @${it.density}x"))
   }
 
+  platform.logSystemInfo()
   return items
 }
 

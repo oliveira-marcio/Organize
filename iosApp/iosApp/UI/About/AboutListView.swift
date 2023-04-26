@@ -69,6 +69,7 @@ struct AboutListView: View {
       )
     }
 
+    platform.logSystemInfo()
     return result
   }()
 

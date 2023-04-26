@@ -71,10 +71,6 @@ actual class Platform actual constructor() {
 
   actual val cpuType = kotlin.native.Platform.cpuArchitecture.name
   actual val screen: ScreenInfo? = ScreenInfo()
-
-  actual fun logSystemInfo() {
-    NSLog(deviceInfo)
-  }
 }
 
 actual class ScreenInfo actual constructor() {
