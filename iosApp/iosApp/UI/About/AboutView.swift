@@ -30,14 +30,16 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import shared
 import SwiftUI
 
 struct AboutView: View {
   @Environment(\.dismiss) private var dismiss
+  @StateObject private var viewModel = AboutViewModel()
 
   var body: some View {
     NavigationView {
-      AboutListView()
+      AboutListView(items: viewModel.items)
         .navigationTitle("About Device")
         .toolbar {
           ToolbarItem(placement: .primaryAction) {
@@ -58,3 +60,5 @@ struct AboutView_Previews: PreviewProvider {
     AboutView()
   }
 }
+
+extension AboutViewModel: ObservableObject { }
