@@ -32,4 +32,6 @@ class AboutViewModel : BaseViewModel() {
     }
     return rowItems
   }
+
+  val items: List<RowItem> = makeRowItems(platform)
 }
