@@ -63,7 +63,7 @@ struct RemindersView: View {
         }
       }
     }
-    .navigationTitle("Reminders")
+    .navigationTitle(viewModelWrapper.viewModel.title)
   }
 }
 

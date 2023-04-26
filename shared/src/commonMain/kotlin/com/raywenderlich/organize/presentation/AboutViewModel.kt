@@ -34,4 +34,5 @@ class AboutViewModel : BaseViewModel() {
   }
 
   val items: List<RowItem> = makeRowItems(platform)
+  val title: String = "About Device"
 }

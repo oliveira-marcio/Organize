@@ -40,7 +40,7 @@ struct AboutView: View {
   var body: some View {
     NavigationView {
       AboutListView(items: viewModel.items)
-        .navigationTitle("About Device")
+        .navigationTitle(viewModel.title)
         .toolbar {
           ToolbarItem(placement: .primaryAction) {
             Button {
