@@ -62,12 +62,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raywenderlich.organize.domain.Reminder
 import com.raywenderlich.organize.presentation.RemindersViewModel
 
 @Composable
 fun RemindersView(
-  viewModel: RemindersViewModel = RemindersViewModel(),
+  viewModel: RemindersViewModel = viewModel(),
   onAboutButtonClick: () -> Unit,
 ) {
   Column {
