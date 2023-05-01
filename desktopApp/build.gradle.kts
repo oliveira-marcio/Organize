@@ -58,6 +58,13 @@ kotlin {
         implementation(compose.desktop.currentOs)
       }
     }
+    named("jvmTest") {
+      dependencies {
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+        implementation(compose.uiTestJUnit4)
+        implementation(compose.desktop.currentOs)
+      }
+    }
   }
 }
 
@@ -92,4 +99,8 @@ compose.desktop {
 
 tasks.named<Copy>("jvmProcessResources") {
   duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+  kotlinOptions.freeCompilerArgs += "-Xuse-experimental=androidx.compose.ui.ExperimentalComposeUiApi"
 }

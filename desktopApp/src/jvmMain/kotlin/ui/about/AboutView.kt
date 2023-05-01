@@ -49,6 +49,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.raywenderlich.organize.presentation.AboutViewModel
 
@@ -60,7 +62,7 @@ fun AboutView(viewModel: AboutViewModel = AboutViewModel()) {
 @Composable
 private fun ContentView(items: List<AboutViewModel.RowItem>) {
   LazyColumn(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier.fillMaxSize().semantics { contentDescription = "aboutView" },
   ) {
     items(items) { row ->
       RowView(title = row.title, subtitle = row.subtitle)
