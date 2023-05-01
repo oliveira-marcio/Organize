@@ -30,39 +30,33 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import XCTest
 
-struct ContentView: View {
-  @State private var shouldOpenAbout = false
+// swiftlint:disable type_name
+class iosAppUITests: XCTestCase {
+  private let app = XCUIApplication()
 
-  var body: some View {
-    NavigationView {
-      RemindersView()
-        .toolbar {
-          ToolbarItem(placement: .bottomBar) {
-            Button {
-              shouldOpenAbout = true
-            } label: {
-              Label("About", systemImage: "info.circle")
-                .labelStyle(.titleAndIcon)
-            }
-            .padding(8)
-            .popover(isPresented: $shouldOpenAbout) {
-              AboutView()
-                .frame(
-                  idealWidth: 350,
-                  idealHeight: 450
-                )
-            }
-            .accessibilityIdentifier("aboutButton")
-          }
-        }
-    }
+  override func setUp() {
+    super.setUp()
+
+    continueAfterFailure = false
+    app.launch()
+  }
+
+  func testAboutButtonExistence() {
+    XCTAssert(app.buttons["aboutButton"].exists)
+  }
+
+  func testOpeningAndClosingAboutPage() {
+    app.buttons["aboutButton"].tap()
+
+    let aboutPageTitle = app.staticTexts["About Device"]
+    XCTAssertTrue(aboutPageTitle.exists)
+
+    app.navigationBars["About Device"].buttons["Done"].tap()
+
+    let remindersPageTitle = app.staticTexts["Reminders"]
+    XCTAssertTrue(remindersPageTitle.exists)
   }
 }
-
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-	}
-}
+// swiftlint:enable type_name
