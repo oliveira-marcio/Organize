@@ -3,8 +3,9 @@ package com.raywenderlich.organize.presentation
 import com.raywenderlich.organize.data.RemindersRepository
 import com.raywenderlich.organize.domain.Reminder
 
-class RemindersViewModel : BaseViewModel() {
-  private val repository = RemindersRepository()
+class RemindersViewModel(
+  private val repository: RemindersRepository
+) : BaseViewModel() {
 
   internal val reminders: List<Reminder>
     get() = repository.reminders

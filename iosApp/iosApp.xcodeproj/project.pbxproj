@@ -17,6 +17,7 @@
 		36DBDA9329F9E58A00853B74 /* ReminderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBDA9229F9E58A00853B74 /* ReminderItem.swift */; };
 		36DBDA9529F9E5A900853B74 /* NewReminderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBDA9429F9E5A900853B74 /* NewReminderTextField.swift */; };
 		36FE4B792A0086EA00E1F286 /* iosAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FE4B782A0086EA00E1F286 /* iosAppUITests.swift */; };
+		36FE4B822A03BA4200E1F286 /* Koin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FE4B812A03BA4200E1F286 /* Koin.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		36DBDA9429F9E5A900853B74 /* NewReminderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReminderTextField.swift; sourceTree = "<group>"; };
 		36FE4B762A0086EA00E1F286 /* iosAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36FE4B782A0086EA00E1F286 /* iosAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppUITests.swift; sourceTree = "<group>"; };
+		36FE4B812A03BA4200E1F286 /* Koin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Koin.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				3006E9CD26DC01FB002F656A /* LaunchScreen.storyboard */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				3006E9C926DC0169002F656A /* Assets.xcassets */,
+				36FE4B812A03BA4200E1F286 /* Koin.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36FE4B822A03BA4200E1F286 /* Koin.swift in Sources */,
 				36DBDA9129F9E39400853B74 /* RemindersViewModelWrapper.swift in Sources */,
 				30712C382738396700AAC53F /* AboutView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
