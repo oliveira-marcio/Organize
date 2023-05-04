@@ -1,16 +1,26 @@
 package com.raywenderlich.organize.presentation
 
+import com.raywenderlich.organize.Modules.initKoin
 import com.raywenderlich.organize.data.RemindersRepository
+import org.koin.core.context.stopKoin
+import org.koin.test.KoinTest
+import org.koin.test.inject
+import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class RemindersViewModelTest {
-  private lateinit var viewModel: RemindersViewModel
+class RemindersViewModelTest : KoinTest {
+  private val viewModel: RemindersViewModel by inject()
 
   @BeforeTest
   fun setup() {
-    viewModel = RemindersViewModel(repository = RemindersRepository())
+    initKoin()
+  }
+
+  @AfterTest
+  fun tearDown() {
+    stopKoin()
   }
 
   @Test
