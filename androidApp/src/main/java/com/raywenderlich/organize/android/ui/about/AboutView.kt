@@ -53,12 +53,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.raywenderlich.organize.presentation.AboutViewModel
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun AboutView(
-  viewModel: AboutViewModel = viewModel(),
+  viewModel: AboutViewModel = getViewModel(),
   onUpButtonClick: () -> Unit
 ) {
   Column {

@@ -4,8 +4,9 @@ import com.raywenderlich.organize.Platform
 import kotlin.math.max
 import kotlin.math.min
 
-class AboutViewModel : BaseViewModel() {
-  private val platform = Platform()
+class AboutViewModel(
+  private val platform: Platform
+) : BaseViewModel() {
 
   data class RowItem(
     val title: String,
