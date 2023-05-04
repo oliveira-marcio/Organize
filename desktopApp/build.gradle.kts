@@ -63,6 +63,7 @@ kotlin {
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         implementation(compose.uiTestJUnit4)
         implementation(compose.desktop.currentOs)
+        implementation("io.insert-koin:koin-core:${rootProject.ext["koinVersion"]}")
       }
     }
   }

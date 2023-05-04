@@ -32,7 +32,8 @@
  * THE SOFTWARE.
  */
 
-val compose_version by extra("1.1.0")
+val composeVersion by extra("1.1.0")
+val koinVersion by extra("3.1.5")
 
 buildscript {
     repositories {
