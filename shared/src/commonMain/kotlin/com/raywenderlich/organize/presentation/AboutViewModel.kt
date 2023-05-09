@@ -1,12 +1,31 @@
 package com.raywenderlich.organize.presentation
 
+import com.raywenderlich.organize.DateFormatter
 import com.raywenderlich.organize.Platform
+import com.russhwolf.settings.Settings
+import kotlinx.datetime.Clock
 import kotlin.math.max
 import kotlin.math.min
 
 class AboutViewModel(
-  private val platform: Platform
+  private val platform: Platform,
+  private val settings: Settings
 ) : BaseViewModel() {
+  val items: List<RowItem> = makeRowItems(platform)
+  val title: String = "About Device"
+  val firstOpening: String
+
+  init {
+    val timestampKey = "FIRST_OPENING_TIMESTAMP"
+    val savedValue = settings.getLongOrNull(timestampKey)
+    firstOpening = if (savedValue == null) {
+      val time = Clock.System.now().epochSeconds - 1
+      settings.putLong(timestampKey, time)
+      DateFormatter.formatEpoch(time)
+    } else {
+      DateFormatter.formatEpoch(savedValue)
+    }
+  }
 
   data class RowItem(
     val title: String,
@@ -33,7 +52,4 @@ class AboutViewModel(
     }
     return rowItems
   }
-
-  val items: List<RowItem> = makeRowItems(platform)
-  val title: String = "About Device"
 }

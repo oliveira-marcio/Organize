@@ -51,6 +51,9 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.raywenderlich.organize.presentation.AboutViewModel
@@ -63,7 +66,10 @@ fun AboutView(
 ) {
   Column {
     Toolbar(title = viewModel.title, onUpButtonClick = onUpButtonClick)
-    ContentView(items = viewModel.items)
+    ContentView(
+      items = viewModel.items,
+      footer = "This page was first opened:\n${viewModel.firstOpening}"
+    )
   }
 }
 
@@ -86,12 +92,29 @@ private fun Toolbar(
 }
 
 @Composable
-private fun ContentView(items: List<AboutViewModel.RowItem>) {
+private fun ContentView(
+  items: List<AboutViewModel.RowItem>,
+  footer: String?,
+) {
   LazyColumn(
-    modifier = Modifier.fillMaxSize(),
+    modifier = Modifier
+      .fillMaxSize()
+      .semantics { contentDescription = "aboutView" },
   ) {
     items(items) { row ->
       RowView(title = row.title, subtitle = row.subtitle)
+    }
+    footer?.let {
+      item {
+        Text(
+          text = it,
+          style = MaterialTheme.typography.caption,
+          textAlign = TextAlign.Center,
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        )
+      }
     }
   }
 }

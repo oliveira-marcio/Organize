@@ -39,18 +39,19 @@ struct AboutView: View {
 
   var body: some View {
     NavigationView {
-      AboutListView(items: viewModel.items)
-        .navigationTitle(viewModel.title)
-        .toolbar {
-          ToolbarItem(placement: .primaryAction) {
-            Button {
-              dismiss()
-            } label: {
-              Text("Done")
-                .bold()
-            }
+      AboutListView(items: viewModel.items,
+                    footer: "This page was first opened on \(viewModel.firstOpening)")
+      .navigationTitle(viewModel.title)
+      .toolbar {
+        ToolbarItem(placement: .primaryAction) {
+          Button {
+            dismiss()
+          } label: {
+            Text("Done")
+              .bold()
           }
         }
+      }
     }
   }
 }

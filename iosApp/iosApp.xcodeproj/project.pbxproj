@@ -104,8 +104,8 @@
 		30712C2D2738374600AAC53F /* About */ = {
 			isa = PBXGroup;
 			children = (
-				30712C372738396700AAC53F /* AboutView.swift */,
 				36DBDA8E29F98D8400853B74 /* AboutListView.swift */,
+				30712C372738396700AAC53F /* AboutView.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
