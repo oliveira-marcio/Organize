@@ -35,12 +35,16 @@
 package ui.reminders
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.ContextMenuDataProvider
+import androidx.compose.foundation.ContextMenuItem
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
@@ -61,7 +65,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.raywenderlich.organize.data.RemindersRepository
 import com.raywenderlich.organize.domain.Reminder
 import com.raywenderlich.organize.presentation.RemindersViewModel
 import koin
@@ -72,22 +75,21 @@ fun RemindersView(
   onAboutButtonClick: () -> Unit,
 ) {
   Column {
-    Toolbar(title = viewModel.title, onAboutButtonClick = onAboutButtonClick)
+    Toolbar(onAboutButtonClick = onAboutButtonClick)
     ContentView(viewModel = viewModel)
   }
 }
 
 @Composable
 private fun Toolbar(
-  title: String,
   onAboutButtonClick: () -> Unit,
 ) {
   TopAppBar(
-    title = { Text(text = title) },
+    title = { Text(text = "Reminders") },
     actions = {
       IconButton(
         onClick = onAboutButtonClick,
-        modifier = Modifier.semantics { contentDescription = "aboutButton" }
+        modifier = Modifier.semantics { contentDescription = "aboutButton" },
       ) {
         Icon(
           imageVector = Icons.Outlined.Info,
@@ -98,6 +100,7 @@ private fun Toolbar(
   )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ContentView(viewModel: RemindersViewModel) {
   var textFieldValue by remember { mutableStateOf("") }
@@ -123,14 +126,30 @@ private fun ContentView(viewModel: RemindersViewModel) {
         viewModel.markReminder(id = item.id, isCompleted = !item.isCompleted)
       }
 
-      ReminderItem(
-        title = item.title,
-        isCompleted = item.isCompleted,
-        modifier = Modifier
-          .fillMaxWidth()
-          .clickable(enabled = true, onClick = onItemClick)
-          .padding(horizontal = 16.dp, vertical = 4.dp)
-      )
+      val onItemDelete = {
+        focusManager.clearFocus()
+        viewModel.deleteReminder(item.id)
+      }
+
+      ContextMenuDataProvider(
+        items = {
+          listOf(
+            ContextMenuItem("Delete", onClick = onItemDelete)
+          )
+        }
+      ) {
+        SelectionContainer(
+          modifier = Modifier
+            .fillMaxWidth()
+            .clickable(enabled = true, onClick = onItemClick)
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+        ) {
+          ReminderItem(
+            title = item.title,
+            isCompleted = item.isCompleted,
+          )
+        }
+      }
     }
 
     item {

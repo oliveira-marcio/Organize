@@ -20,6 +20,10 @@ class RemindersRepository(
   fun markReminder(id: String, isCompleted: Boolean) {
     databaseHelper.updateIsCompleted(id, isCompleted)
   }
+
+  fun deleteReminder(id: String) {
+    databaseHelper.deleteReminder(id)
+  }
 }
 
 fun ReminderDb.map() = Reminder(

@@ -31,10 +31,12 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import shared
 
 struct RemindersView: View {
   @StateObject private var viewModelWrapper = RemindersViewModelWrapper()
   @State private var textFieldValue = ""
+  @FocusState private var shouldFocusOnTextField: Bool
 
   var body: some View {
     List {
@@ -44,10 +46,29 @@ struct RemindersView: View {
             ReminderItem(title: item.title, isCompleted: item.isCompleted)
               .onTapGesture {
                 withAnimation {
-                  viewModelWrapper.viewModel.markReminder(
-                    id: item.id,
-                    isCompleted: !item.isCompleted
-                  )
+                  viewModelWrapper.viewModel.markReminder(id: item.id, isCompleted: !item.isCompleted)
+                  shouldFocusOnTextField = false
+                }
+              }
+              .contextMenu {
+                Button(role: .destructive) {
+                  withAnimation {
+                    viewModelWrapper.viewModel.deleteReminder(id: item.id)
+                  }
+                } label: {
+                  Label("Delete", systemImage: "trash")
+                }
+              }
+              .swipeActions(
+                edge: .trailing,
+                allowsFullSwipe: true
+              ) {
+                Button(role: .destructive) {
+                  withAnimation {
+                    viewModelWrapper.viewModel.deleteReminder(id: item.id)
+                  }
+                } label: {
+                  Label("Delete", systemImage: "trash")
                 }
               }
           }
@@ -59,11 +80,21 @@ struct RemindersView: View {
           withAnimation {
             viewModelWrapper.viewModel.createReminder(title: textFieldValue)
             textFieldValue = ""
+            shouldFocusOnTextField = true
           }
+        }
+        .focused($shouldFocusOnTextField)
+      }
+    }
+    .navigationTitle("Reminders")
+    .toolbar {
+      ToolbarItemGroup(placement: .keyboard) {
+        Spacer()
+        Button("Done") {
+          shouldFocusOnTextField = false
         }
       }
     }
-    .navigationTitle(viewModelWrapper.viewModel.title)
   }
 }
 

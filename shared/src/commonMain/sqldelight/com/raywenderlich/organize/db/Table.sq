@@ -13,3 +13,6 @@ VALUES (?,?);
 
 updateIsCompleted:
 UPDATE ReminderDb SET isCompleted = ? WHERE id = ?;
+
+deleteReminder:
+DELETE FROM ReminderDb WHERE id = ?;
