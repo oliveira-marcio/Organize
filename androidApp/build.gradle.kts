@@ -87,6 +87,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.1")
     implementation("io.insert-koin:koin-android:${rootProject.ext["koinVersion"]}")
     implementation("io.insert-koin:koin-androidx-compose:${rootProject.ext["koinVersion"]}")
+    implementation("com.russhwolf:multiplatform-settings:${rootProject.extra["settingsVersion"]}")
     androidTestImplementation(
     "androidx.compose.ui:ui-test-junit4:${rootProject.extra["composeVersion"]}"
 )

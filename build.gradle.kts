@@ -34,6 +34,7 @@
 
 val composeVersion by extra("1.1.0")
 val koinVersion by extra("3.1.5")
+val settingsVersion by extra("0.8.1")
 
 buildscript {
     repositories {

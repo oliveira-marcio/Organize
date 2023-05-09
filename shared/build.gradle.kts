@@ -56,6 +56,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("io.insert-koin:koin-core:${rootProject.extra["koinVersion"]}")
+                implementation("com.russhwolf:multiplatform-settings:${rootProject.extra["settingsVersion"]}")
             }
         }
         val commonTest by getting {
