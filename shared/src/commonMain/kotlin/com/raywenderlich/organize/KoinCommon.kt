@@ -8,6 +8,8 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
+expect val platformModule: Module
+
 object Modules {
   val core = module {
     factory { Platform() }
@@ -31,6 +33,7 @@ object Modules {
       coreModule,
       repositoriesModule,
       viewModelsModule,
+      platformModule
     )
   }
 }
