@@ -1,25 +1,29 @@
 package com.raywenderlich.organize.data
 
+import com.raywenderlich.organize.db.ReminderDb
 import com.raywenderlich.organize.domain.Reminder
 import com.raywenderlich.organize.domain.UUID
 
-class RemindersRepository {
-  private val _reminders: MutableList<Reminder> = mutableListOf()
+class RemindersRepository(
+  private val databaseHelper: DatabaseHelper
+) {
+  val reminders: List<Reminder>
+    get() = databaseHelper.fetchAllItems().map(ReminderDb::map)
 
   fun createReminder(title: String) {
-    val newReminder = Reminder(
-      id = UUID().toString(), title = title, isCompleted = false
+    databaseHelper.insertReminder(
+      id = UUID().toString(),
+      title = title,
     )
-    _reminders.add(newReminder)
   }
 
   fun markReminder(id: String, isCompleted: Boolean) {
-    val index = _reminders.indexOfFirst { it.id == id }
-    if (index != -1) {
-      _reminders[index] = _reminders[index].copy(isCompleted = isCompleted)
-    }
+    databaseHelper.updateIsCompleted(id, isCompleted)
   }
-
-  val reminders: List<Reminder>
-    get() = _reminders
 }
+
+fun ReminderDb.map() = Reminder(
+  id = this.id,
+  title = this.title,
+  isCompleted = this.isCompleted(),
+)

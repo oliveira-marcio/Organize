@@ -1,5 +1,6 @@
 package com.raywenderlich.organize
 
+import com.raywenderlich.organize.data.DatabaseHelper
 import com.raywenderlich.organize.data.RemindersRepository
 import com.raywenderlich.organize.presentation.AboutViewModel
 import com.raywenderlich.organize.presentation.RemindersViewModel
@@ -13,9 +14,10 @@ expect val platformModule: Module
 object Modules {
   val core = module {
     factory { Platform() }
+    factory { DatabaseHelper(get()) }
   }
   val repositories = module {
-    factory { RemindersRepository() }
+    factory { RemindersRepository(get()) }
   }
   val viewModels = module {
     factory { RemindersViewModel(get()) }
@@ -24,9 +26,9 @@ object Modules {
 
   fun initKoin(
     appModule: Module = module { },
-    coreModule: Module = Modules.core,
-    repositoriesModule: Module = Modules.repositories,
-    viewModelsModule: Module = Modules.viewModels,
+    coreModule: Module = core,
+    repositoriesModule: Module = repositories,
+    viewModelsModule: Module = viewModels,
   ): KoinApplication = startKoin {
     modules(
       appModule,
