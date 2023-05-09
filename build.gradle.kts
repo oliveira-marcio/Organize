@@ -35,6 +35,7 @@
 val composeVersion by extra("1.1.0")
 val koinVersion by extra("3.1.5")
 val settingsVersion by extra("0.8.1")
+val sqlDelightVersion by extra("1.5.3")
 
 buildscript {
     repositories {
@@ -47,6 +48,7 @@ buildscript {
         classpath("org.jetbrains.compose:compose-gradle-plugin:1.0.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
         classpath("com.android.tools.build:gradle:7.1.1")
+        classpath("com.squareup.sqldelight:gradle-plugin:1.5.3")
     }
 }
 
